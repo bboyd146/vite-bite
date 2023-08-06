@@ -14,12 +14,18 @@ const commentSchema = new Schema ({
     },
     post: {
         type: Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: 'Post',
+        required: true
     },
     likes: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
+    initialComment: {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+        default: null
+    },
     createdAt: {
         type: Date,
         default: Date.now

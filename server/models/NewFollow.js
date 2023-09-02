@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const NewFollowSchema = new Schema ({
+const NewFollowSchema = new Schema({
     sender: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -17,11 +17,13 @@ const NewFollowSchema = new Schema ({
         enum: ['pending', 'accepted', 'declined'],
         default: 'pending'
     },
-    createdAt:{
+    createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
     }
-})
+}, { timestamps: true });
+
 
 const NewFollow = mongoose.model('NewFollow', NewFollowSchema)
 

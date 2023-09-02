@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const commentSchema = new Schema ({
+const commentSchema = new Schema({
     content: {
         type: String,
         required: true,
@@ -28,9 +28,11 @@ const commentSchema = new Schema ({
     },
     createdAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
     }
-})
+}, { timestamps: true });
+
 
 const Comment = mongoose.model('Comment', commentSchema)
 

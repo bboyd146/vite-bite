@@ -4,10 +4,10 @@ const { User, Post, NewFollow, Comment } = require('../models');
 const resolvers = {
     Query: {
         users: async () => {
-            return User.find();
+            return User.find().populate('posts');
         },
         user: async (parent, { username }) => {
-            return User.findOne({ username });
+            return User.findOne({ username }).populate('posts');
         },
         posts: async () => {
             return Post.find().sort({ createdAt: -1 });

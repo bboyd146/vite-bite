@@ -1,0 +1,27 @@
+[
+    {
+        "username": "My Guy",
+        "email": "mGuy@mail.com",
+        "password": "password01"
+    },
+    {
+        "username": "Pizza Man",
+        "email": "Pman@mail.com",
+        "password": "password02"
+    },
+    {
+        "username": "Mama Pie",
+        "email": "mamamia@mail.com",
+        "password": "password03"
+    },
+    {
+        "username": "Tom Brady",
+        "email": "TBrady@mail.com",
+        "password": "password04"
+    },
+    {
+        "username": "Luke Skywalker",
+        "email": "sith@mail.com",
+        "password": "password05"
+    }
+]

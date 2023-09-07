@@ -9,6 +9,10 @@ const typeDefs = gql`
         followers: [User]
         following: [User]
     }
+    type Auth {
+    token: ID!
+    user: User
+    }
     type Comment {
         _id: ID
         content: String
@@ -34,10 +38,12 @@ const typeDefs = gql`
     }
 
     type Query {
-    user: User
+    user(username: String!): User
     users: [User]
-    posts: [Post]!
+    all_posts: [Post]
+    posts(username: String): [Post]
     post(postId: ID!): Post
+    me: User
     }
 `
 

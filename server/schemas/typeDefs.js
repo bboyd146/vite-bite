@@ -22,12 +22,17 @@ const typeDefs = gql`
         initialComment: Comment
         createdAt: String
     }
+    enum FollowRequestStatus {
+        PENDING
+        ACCEPTED
+        DECLINED
+    }
     type NewFollow {
         _id: ID
-        sender: User
-        receiver: User
-        status: String
-        createdAt: String
+        sender: User!
+        receiver: User!
+        status: FollowRequestStatus!
+        createdAt: String!
     }
     type Post {
         _id: ID

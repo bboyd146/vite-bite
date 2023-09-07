@@ -44,6 +44,37 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+        addPost: async (parent, { content }, context) => {
+            if (context.user) {
+                const post = await Post.create({
+                    content,
+                    author: context.user.username,
+                });
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { posts: post._id } }
+                );
+                return post;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        addComment: async (parent, { postId, content }, context) => {
+            if (context.user) {
+                return Thought.findOneAndUpdate(
+                    { _id: postId },
+                    {
+                        $addToSet: {
+                            comments: { content, author: context.user.username },
+                        },
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
     }
 }
 

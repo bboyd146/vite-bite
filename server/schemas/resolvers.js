@@ -61,7 +61,7 @@ const resolvers = {
         },
         addComment: async (parent, { postId, content }, context) => {
             if (context.user) {
-                return Comment.findOneAndUpdate(
+                return Post.findOneAndUpdate(
                     { _id: postId },
                     {
                         $addToSet: {
@@ -107,7 +107,22 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
         },
-    }
-}
+        sendFollowReq: async (parent, { receiverId, senderId}, context) => {
+            if (context.user) {
+                const follower = await NewFollow.create({
+                    receiverId,
+                    senderId: context.user._id,
+                });
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $addToSet: { followers: follower.senderId } }
+                );
+                return follower;
+            }
+            throw new AuthenticationError('You need to be logged in!');
+        },
+            }
+        }
+
 
 module.exports = resolvers

@@ -59,6 +59,7 @@ const typeDefs = gql`
     addComment(postId: ID!, content: String!): Post
     removePost(postId: ID!): Post
     removeComment(postId: ID!, commentId: ID!): Post
+    sendFollowReq(receiverId: ID!, senderId: ID!): NewFollow
     }
 
 `
